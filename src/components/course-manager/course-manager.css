@@ -1,0 +1,27 @@
+@media only screen and (max-width: 992px) {
+    .brand-visibility {
+        display: none;
+    }
+}
+
+.float{
+    position:fixed;
+    width:60px;
+    height:60px;
+    bottom:40px;
+    right:40px;
+    background-color:#000;
+    color:#FFF;
+    border-radius:50px;
+    text-align:center;
+    box-shadow: 2px 2px 3px #999;
+}
+
+.my-float{
+}
+
+.my-controls-at-top-right {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
