@@ -5,3 +5,21 @@
 .pills-layout{
     margin-top:10px
 }
+
+
+.link {
+    color: #000;
+}
+
+.link:hover {
+    color: #000
+}
+
+.editor-layout{
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.nav-width{
+    width: 10em;
+}

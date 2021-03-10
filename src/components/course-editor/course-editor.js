@@ -1,98 +1,81 @@
-import React from 'react'
-import {Link} from "react-router-dom";
-import './course-editor.css'
+import React,{useState} from 'react'
+import {Link, useParams} from "react-router-dom";
+import moduleReducer from "../../reducers/module-reducer";
+import lessonReducer from "../../reducers/lesson-reducer";
+import topicReducer from "../../reducers/topic-reducer";
+import couseEditorReducer from "../../reducers/course-reducer";
+import {combineReducers, createStore} from "redux";
+import {Provider,connect} from "react-redux";
+import ModuleList from "./module-list";
+import LessonTabs from "./lesson-tabs";
+import TopicTabs from "./topic-tabs";
+import CourseDetails from "./course-details";
+import courseService,{findCourse} from "../../services/course-service";
+import './course-editor.css';
 
-const CourseEditor = ({history}) =>
-    <div>
-        <nav className="navbar navbar-expand-md navbar-light bg-light">
-            <div className="container">
-                <div className="col-4 ">
-                    <h5><i className="fas fa-times " onClick={() => history.goBack()}></i>&nbsp;&nbsp;&nbsp;CS5610 - WebDev</h5>
-                </div>
-                <div className="col-8 ">
-                    <ul className="nav nav-tabs">
-                        <li className="nav-item">
-                            <Link className="nav-link " aria-current="page" href="#">
-                                Home
+const reducer = combineReducers({
+    moduleReducer: moduleReducer,
+    lessonReducer: lessonReducer,
+    topicReducer: topicReducer,
+    couseEditorReducer: couseEditorReducer
+})
+
+// const findCourseById = (courseId) => {
+//
+//     let x={
+//         title:""
+//     }
+//
+//     courseService.findCourse(courseId).then(course => {
+//         x.title=course.title
+//     })
+//
+//     return x
+//
+// }
+
+// const store = createStore(moduleReducer)
+// const store = createStore(lessonReducer)
+const store = createStore(reducer)
+
+const CourseEditor = (props) => {
+    const {layout, courseId, moduleId, topicId} = useParams()
+
+    // const [courseState,setCourseState] =useState(props.course)
+    // setCourseState(props.findCourse(courseId))
+    return (
+        <Provider store={store}>
+            <div>
+                <br/>
+                <div className="row editor-layout">
+                    <div className="col-3">
+                        <h2>
+                            <Link to={`/courses/${layout}`}>
+                                <i className="fas fa-times float-left"></i>
                             </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link active" href="#">Modules</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" href="#">Grades</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" href="#">People</Link>
-
-                        </li>
-                        <li className="nav-item">
-
-                        </li>
-
-                    </ul>
-
-                </div>
-
-            </div>
-        </nav>
-
-        <div class="container modules_layout">
-
-            <div class="row ">
-                <div class="col-4">
-
-                    <ul class="list-group ">
-                        <li class="list-group-item list-group-item-dark active">
-                            Module 1
-                            <i class="pull-right fa fa-trash"></i>
-                        </li>
-                        <li class="list-group-item list-group-item-dark">
-                            Module 2
-                            <i class="pull-right fa fa-trash"></i>
-                        </li>
-                        <li class="list-group-item list-group-item-dark">Module 3
-                            <i class="pull-right fa fa-trash"></i></li>
-                        <li class="list-group-item list-group-item-dark">Module 4
-                            <i class="pull-right fa fa-trash"></i></li>
-                        <li class="list-group-item list-group-item-dark">Module 5 <i class="pull-right fa fa-trash"></i></li>
-                        <li class="list-group-item list-group-item-dark">Module 6 <i class="pull-right fa fa-trash"></i></li>
-                        <li class="list-group-item list-group-item-dark">Module 7 <i class="pull-right fa fa-trash"></i></li>
-                        <li class="list-group-item list-group-item-success text-center"><Link class="btn" href="#" ><i class="fa fa-plus"></i> Add Module</Link></li>
-                    </ul>
-
-            </div>
-            <div class="col-8 bg-light">
-                <div class="row pills-layout">
-                    <div class="col-8">
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <Link class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Topic 1</Link>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <Link class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Topic 2</Link>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <Link class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Topic 3</Link>
-                            </li>
-                        </ul>
+                             &nbsp;
+                            <CourseDetails/>
+                            {/*<i onClick={() => props.history.goBack()}*/}
+                            {/*   className="fas fa-times float-right"></i>*/}
+                        </h2>
                     </div>
-                    <div class="col-4">
-                        <Link class="btn btn-success" href="#" ><i class="fa fa-plus"> </i> Add Topic</Link>
+                    <div className="col-9">
+
+                    </div>
+                </div>
+
+                <div className="row editor-layout">
+                    <div className="col-3">
+                        <ModuleList/>
+                    </div>
+                    <div className="col-9 bg-white ">
+                        <br/>
+                        <div className="row container"><LessonTabs/></div>
+                        <br/>
+                        <div className="row container"><TopicTabs/></div>
+                    </div>
                 </div>
             </div>
-
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui</div>
-                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui</div>
-                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
-            </div>
-
-
-        </div>
-    </div>
-</div>
-
-    </div>
+        </Provider>)}
 
 export default CourseEditor
