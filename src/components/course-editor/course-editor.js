@@ -3,12 +3,14 @@ import {Link, useParams} from "react-router-dom";
 import moduleReducer from "../../reducers/module-reducer";
 import lessonReducer from "../../reducers/lesson-reducer";
 import topicReducer from "../../reducers/topic-reducer";
+import widgetReducer from "../../reducers/widget-reducer";
 import couseEditorReducer from "../../reducers/course-reducer";
 import {combineReducers, createStore} from "redux";
 import {Provider,connect} from "react-redux";
 import ModuleList from "./module-list";
 import LessonTabs from "./lesson-tabs";
 import TopicTabs from "./topic-tabs";
+import WidgetList from "../widgets/widget-list";
 import CourseDetails from "./course-details";
 import courseService,{findCourse} from "../../services/course-service";
 import './course-editor.css';
@@ -17,6 +19,7 @@ const reducer = combineReducers({
     moduleReducer: moduleReducer,
     lessonReducer: lessonReducer,
     topicReducer: topicReducer,
+    widgetReducer: widgetReducer,
     couseEditorReducer: couseEditorReducer
 })
 
@@ -73,6 +76,9 @@ const CourseEditor = (props) => {
                         <div className="row container"><LessonTabs/></div>
                         <br/>
                         <div className="row container"><TopicTabs/></div>
+                        <br/>
+                        <div className="row container"><WidgetList/></div>
+                        <br/>
                     </div>
                 </div>
             </div>

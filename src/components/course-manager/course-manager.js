@@ -187,8 +187,7 @@ export default class CourseManager
                                </div>
                            </nav>
 
-                           <CourseEditor {...props} />
-
+                           <CourseEditor {...props}/>
                        </div>}>
                 </Route>
 
