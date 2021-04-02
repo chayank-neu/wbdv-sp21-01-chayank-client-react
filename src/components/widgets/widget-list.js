@@ -2,6 +2,8 @@ import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import HeadingWidget from "./heading-widget";
 import ParagraphWidget from "./paragraph-widget";
+import ListWidget from "./list-widget";
+import ImageWidget from "./image-widget";
 import {useParams} from "react-router-dom"
 import widgetActions from "../../actions/widget-actions";
 
@@ -49,6 +51,22 @@ const WidgetList = (
                                     widget={_widget}
                                     topicId={topicId}
                                 />
+                            }
+                            {
+                                _widget.type === "LIST" &&
+                                <ListWidget
+                                    updateWidget={updateWidget}
+                                    deleteWidget={deleteWidget}
+                                    widget={_widget}
+                                    topicId={topicId}/>
+                            }
+                            {
+                                _widget.type === "IMAGE" &&
+                                <ImageWidget
+                                    updateWidget={updateWidget}
+                                    deleteWidget={deleteWidget}
+                                    widget={_widget}
+                                    topicId={topicId}/>
                             }
                         </li>
                     )

@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import {Link} from "react-router-dom";
 
-const ParagraphWidget = (
+
+const ListWidget = (
     {
         widget,
         deleteWidget,
@@ -9,10 +10,10 @@ const ParagraphWidget = (
         topicId
     }) =>
 {
-
-
     const [editing, setEditing] = useState(false)
     const [cachedWidget, setCahedWidget] = useState(widget)
+
+
     return (
         <>
             {
@@ -20,15 +21,37 @@ const ParagraphWidget = (
                 <>
                     <div className="mb-3 row">
                         <div className="col-9">
-                            <p>
-                                {widget.text}
-                            </p>
+                            {
+                                (widget.widgetOrder === 1)&&
+                                <ol>
+                                    {
+                                        widget.text.split("\n").map(item => {
+                                            return(
+                                                <li>{item}</li>
+                                            )
+                                        })
+                                    }
+                                </ol>
+                            }
+                            {
+                                !(widget.widgetOrder === 1) &&
+                                <ul>
+                                    {
+                                        widget.text.split("\n").map(item => {
+                                            return(
+                                                <li>{item}</li>
+                                            )
+                                        })
+                                    }
+                                </ul>
+                            }
                         </div>
                         <div className="col-3">
                             <i onClick={() => setEditing(true)} className="fas fa-cog float-right"></i>
                         </div>
 
                     </div>
+
                 </>
             }
             {
@@ -61,7 +84,23 @@ const ParagraphWidget = (
                     </div>
                     <div className=" mb-3 row">
                         <div className="col-9">
+                            <input type="checkbox"
+                                   onChange={(e) =>
+                                   {
+                                       setCahedWidget({
+                                           ...cachedWidget,
+                                           widgetOrder: (e.target.checked)? 1:0
+                                       });
+                                       let x=e.target.value;
+
+                                   }}
+                                   checked={ (cachedWidget.widgetOrder === 1)}/> Ordered
+                        </div>
+                    </div>
+                    <div className=" mb-3 row">
+                        <div className="col-9">
                             <textarea
+                                rows={10}
                                 onChange={(e) =>
                                     setCahedWidget({
                                         ...cachedWidget,
@@ -77,4 +116,7 @@ const ParagraphWidget = (
     )
 }
 
-export default ParagraphWidget
+export default ListWidget
+
+
+
