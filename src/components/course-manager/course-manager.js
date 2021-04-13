@@ -6,6 +6,9 @@ import {Link, Route} from "react-router-dom";
 import courseService, {findAllCourses, deleteCourse} from "../../services/course-service";
 import './course-manager.css';
 
+import QuizzesList from "../quizzes/quizzes-list";
+import Quiz from "../quizzes/quiz";
+
 export default class CourseManager
     extends React.Component {
 
@@ -14,7 +17,6 @@ export default class CourseManager
         this.state = {
             courses: [],
             selectedCourse: {}
-
         }
 
         this.input = React.createRef();
@@ -166,6 +168,14 @@ export default class CourseManager
                     <button className="float" onClick={() => this.addCourse(this.input.current.value)}>
                         <i className="fa fa-plus my-float" ></i>
                     </button>
+                </Route>
+
+                <Route path="/courses/:courseId/quizzes" exact={true}>
+                    <QuizzesList/>
+                </Route>
+
+                <Route path="/courses/:courseId/quizzes/:quizId" exact={true}>
+                    <Quiz/>
                 </Route>
 
                 <Route path={[

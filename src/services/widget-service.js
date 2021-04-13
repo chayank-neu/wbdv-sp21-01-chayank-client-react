@@ -1,5 +1,5 @@
-const API_URL = "https://wbdv-sp21-01-chayank-server-ja.herokuapp.com/api";
-//const API_URL = "http://localhost:8080/api/";
+//const API_URL = "https://wbdv-sp21-01-chayank-server-ja.herokuapp.com/api";
+const API_URL = "http://localhost:8080/api/";
 // http://localhost:8080/api/topics/${topicId}/widgets
 export const createWidgetForTopic = (topicId, widget) =>
     fetch(`${API_URL}/topics/${topicId}/widgets`, {

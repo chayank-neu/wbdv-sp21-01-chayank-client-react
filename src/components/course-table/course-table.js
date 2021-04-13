@@ -19,6 +19,7 @@ export default class CourseTable extends
                         <th>Title</th>
                         <th className="d-none d-md-table-cell">Owned by</th>
                         <th className="d-none d-lg-table-cell">Last modified</th>
+                        <th className="d-none d-lg-table-cell">Quiz</th>
                         <th className="">
                             <div className="float-right">
                                 <Link><i className="fas fa-folder fa-2x"></i></Link>&nbsp;&nbsp;
