@@ -1,5 +1,14 @@
 import React, {useState} from "react";
 
+const setdbAnswer=(question,flag)=>{
+    if(flag)
+    {
+
+        question.answer="true";
+    }else{
+        question.answer="false";
+    }
+}
 const TrueFalseQuestion = ({question}) => {
     const [answer, setAnswer] = useState(null)
     const [correct, setCorrect] = useState(false)
@@ -42,7 +51,10 @@ const TrueFalseQuestion = ({question}) => {
                 `}>
                     <label><input
                         type="radio"
-                        onClick={() => setAnswer(true)}
+                        onClick={() => {
+                            setAnswer(true)
+                            setdbAnswer(question,true)
+                        }}
                         name={question._id}/>&nbsp; &nbsp;True</label>
 
                     {
@@ -67,7 +79,10 @@ const TrueFalseQuestion = ({question}) => {
                 `}>
                     <label><input
                         type="radio"
-                        onClick={() => setAnswer(false)}
+                        onClick={() => {
+                            setAnswer(false)
+                            setdbAnswer(question,false)
+                        }}
                         name={question._id}/>&nbsp; &nbsp;False</label>
 
                     {
@@ -114,7 +129,8 @@ const TrueFalseQuestion = ({question}) => {
                         }
                     }
                 }
-            } >Grade</button>
+            }
+            >Check Answer</button>
 
         </div>
     )

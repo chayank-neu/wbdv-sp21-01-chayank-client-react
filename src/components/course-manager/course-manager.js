@@ -8,6 +8,7 @@ import './course-manager.css';
 
 import QuizzesList from "../quizzes/quizzes-list";
 import Quiz from "../quizzes/quiz";
+import AttemptList from "../quizzes/quiz-attempts";
 
 export default class CourseManager
     extends React.Component {
@@ -176,6 +177,10 @@ export default class CourseManager
 
                 <Route path="/courses/:courseId/quizzes/:quizId" exact={true}>
                     <Quiz/>
+                </Route>
+
+                <Route path="/quizzes/:quizId/attempts" exact={true}>
+                    <AttemptList/>
                 </Route>
 
                 <Route path={[

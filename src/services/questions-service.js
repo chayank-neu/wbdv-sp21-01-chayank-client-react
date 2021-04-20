@@ -1,4 +1,4 @@
-const QUIZZES_URL = "http://localhost:3000/api/quizzes";
+const QUIZZES_URL = "https://node-wbdv.herokuapp.com/api/quizzes";
 
 
 export const findQuestionsForQuiz = (quizId) =>

@@ -1,5 +1,9 @@
 import React, {useState} from "react";
 
+const setdbAnswer=(question,choice)=>{
+    question.answer=choice;
+}
+
 const MultipleChoiceQuestion = ({question}) => {
     const [answer, setAnswer] = useState('')
     const [correct, setCorrect] = useState(false)
@@ -41,7 +45,12 @@ const MultipleChoiceQuestion = ({question}) => {
 
                                 <label>
                                     <input type="radio"
-                                           onClick={() => setAnswer(choice)}
+                                           onClick={() =>
+                                           {
+                                               setAnswer(choice)
+                                               setdbAnswer(question,choice)
+
+                                           }}
                                            name={question._id}/>
                                     &nbsp; &nbsp; {choice}
                                 </label>
@@ -82,7 +91,7 @@ const MultipleChoiceQuestion = ({question}) => {
                     }
 
                 }
-            }>Grade</button>
+            }>Check Answer</button>
 
         </div>
     )

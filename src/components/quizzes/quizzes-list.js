@@ -19,22 +19,37 @@ const QuizzesList = () => {
                     quizzes.map((quiz) => {
                         return(
                             <li className="list-group-item" key={quiz._id}>
-                                <Link
-                                    to={`/courses/${courseId}/quizzes/${quiz._id}`}
-                                     key={quiz._id}>
-                                    {quiz.title}
-                                </Link>
+                                <div className="row">
 
-                                <div className="float-right">
+                                <div className="col-4">
+                                    <Link
+                                        to={`/courses/${courseId}/quizzes/${quiz._id}`}
+                                        key={quiz._id}>
+                                        {quiz.title}
+                                    </Link>
+                                </div>
+
+
+                                <div className="col-4">
+
+                                    <Link
+                                        to={`/quizzes/${quiz._id}/attempts`}>
+                                        All Attempts for {quiz.title}
+                                    </Link>
+
+                                </div>
+
+                                <div className="col-4 ">
                                     <Link
 
                                         to={`/courses/${courseId}/quizzes/${quiz._id}`}
 
-                                        className="btn btn-primary " key={quiz._id}>
+                                        className="btn btn-primary float-right" key={quiz._id}>
                                         Start
                                     </Link>
 
                                  </div>
+                                </div>
 
 
                             </li>
